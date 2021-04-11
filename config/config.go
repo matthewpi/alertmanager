@@ -784,6 +784,7 @@ type Receiver struct {
 	WechatConfigs    []*WechatConfig    `yaml:"wechat_configs,omitempty" json:"wechat_configs,omitempty"`
 	PushoverConfigs  []*PushoverConfig  `yaml:"pushover_configs,omitempty" json:"pushover_configs,omitempty"`
 	VictorOpsConfigs []*VictorOpsConfig `yaml:"victorops_configs,omitempty" json:"victorops_configs,omitempty"`
+	DiscordConfigs   []*DiscordConfig   `yaml:"discord_configs,omitempty" json:"discord_configs.omitempty"`
 }
 
 // UnmarshalYAML implements the yaml.Unmarshaler interface for Receiver.

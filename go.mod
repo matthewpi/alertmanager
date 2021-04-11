@@ -1,9 +1,12 @@
 module github.com/prometheus/alertmanager
 
+go 1.16
+
 require (
 	github.com/alecthomas/units v0.0.0-20210208195552-ff826a37aa15
 	github.com/cenkalti/backoff/v4 v4.1.0
 	github.com/cespare/xxhash v1.1.0
+	github.com/diamondburned/arikawa/v2 v2.0.6
 	github.com/go-kit/kit v0.10.0
 	github.com/go-openapi/errors v0.20.0
 	github.com/go-openapi/loads v0.20.2
@@ -31,10 +34,11 @@ require (
 	github.com/stretchr/testify v1.7.0
 	github.com/xlab/treeprint v1.1.0
 	go.uber.org/atomic v1.5.0
+	golang.org/x/crypto v0.0.0-20210513164829-c07d793c2f9a // indirect
 	golang.org/x/net v0.0.0-20210421230115-4e50805a0758
+	golang.org/x/sys v0.0.0-20210603125802-9665404d3644 // indirect
+	golang.org/x/time v0.0.0-20210220033141-f8bda1e9f3ba // indirect
 	golang.org/x/tools v0.1.0
 	gopkg.in/alecthomas/kingpin.v2 v2.2.6
 	gopkg.in/yaml.v2 v2.4.0
 )
-
-go 1.16

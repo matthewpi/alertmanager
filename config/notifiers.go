@@ -19,6 +19,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/diamondburned/arikawa/v2/discord"
 	"github.com/pkg/errors"
 
 	commoncfg "github.com/prometheus/common/config"
@@ -126,6 +127,13 @@ var (
 		Retry:    duration(1 * time.Minute),
 		Expire:   duration(1 * time.Hour),
 		HTML:     false,
+	}
+
+	// DefaultDiscordConfig defines default values for Discord configurations.
+	DefaultDiscordConfig = DiscordConfig{
+		NotifierConfig: NotifierConfig{
+			VSendResolved: true,
+		},
 	}
 )
 
@@ -576,6 +584,29 @@ func (c *PushoverConfig) UnmarshalYAML(unmarshal func(interface{}) error) error 
 	}
 	if c.Token == "" {
 		return fmt.Errorf("missing token in Pushover config")
+	}
+	return nil
+}
+
+type DiscordConfig struct {
+	NotifierConfig `yaml:",inline" json:",inline"`
+
+	WebhookID discord.WebhookID `yaml:"webhook_id" json:"webhook_id"`
+	Token string `yaml:"token" json:"token"`
+}
+
+// UnmarshalYAML implements the yaml.Unmarshaler interface.
+func (c *DiscordConfig) UnmarshalYAML(unmarshal func(interface{}) error) error {
+	*c = DefaultDiscordConfig
+	type plain DiscordConfig
+	if err := unmarshal((*plain)(c)); err != nil {
+		return err
+	}
+	if c.WebhookID == discord.NullWebhookID {
+		return fmt.Errorf("missing webhook_id key in Discord config")
+	}
+	if c.Token == "" {
+		return fmt.Errorf("missing token in Discord config")
 	}
 	return nil
 }
